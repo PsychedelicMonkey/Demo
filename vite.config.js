@@ -1,10 +1,12 @@
-import { defineConfig } from 'vite';
+import { defineConfig, lazyPlugins } from 'vite-plus';
 import laravel from 'laravel-vite-plugin';
 import { bunny } from 'laravel-vite-plugin/fonts';
 import tailwindcss from '@tailwindcss/vite';
+import inertia from '@inertiajs/vite'
+import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
-    plugins: [
+    plugins: lazyPlugins(() => [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
@@ -14,8 +16,17 @@ export default defineConfig({
                 }),
             ],
         }),
+        inertia(),
         tailwindcss(),
-    ],
+        vue({
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                }
+            }
+        })
+    ]),
     server: {
         watch: {
             ignored: ['**/storage/framework/views/**'],
