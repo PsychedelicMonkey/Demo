@@ -12,12 +12,13 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "~3.0",
         "laravel/pail": "^1.2.5",
         "laravel/pao": "^1.0.6",
         "laravel/pint": "^1.27",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "phpunit/phpunit": "^12.5.12"
+        "pestphp/pest": "^5.3"
     },
     "autoload": {
         "psr-4": {
@@ -44,8 +45,19 @@
             "Composer\\Config::disableProcessTimeout",
             "@php artisan dev"
         ],
+        "lint": [
+            "pint --parallel"
+        ],
+        "lint:check": [
+            "pint --parallel --test"
+        ],
+        "types:check": [
+            "phpstan analyse"
+        ],
         "test": [
             "@php artisan config:clear --ansi @no_additional_args",
+            "@lint:check",
+            "@types:check",
             "@php artisan test"
         ],
         "post-autoload-dump": [
