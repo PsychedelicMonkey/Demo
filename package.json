@@ -16,9 +16,12 @@
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.1.11",
+        "@types/node": "^22.13.5",
         "@vitejs/plugin-vue": "^6.0.0",
+        "typescript": "^5.2.2",
         "vite": "npm:@voidzero-dev/vite-plus-core@1.4.0",
-        "vite-plus": "1.4.0"
+        "vite-plus": "1.4.0",
+        "vue-tsc": "^3.3.13"
     },
     "optionalDependencies": {
         "@laravel/multiplex": "^0.4.1",

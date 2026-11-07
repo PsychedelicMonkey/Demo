@@ -8,7 +8,7 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
     plugins: lazyPlugins(() => [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: ['resources/css/app.css', 'resources/js/app.ts'],
             refresh: true,
             fonts: [
                 bunny('Instrument Sans', {
