@@ -1,9 +1,74 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Form, Head } from '@inertiajs/vue3';
+import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import InputError from '@/components/InputError.vue';
+import { Button } from '@/components/ui/button';
+import { Loading } from '@/components/ui/loading';
+import SecurityController from '@/actions/App/Http/Controllers/Settings/SecurityController';
 </script>
 
 <template>
     <Head title="Security settings" />
 
-    <h1>Security settings</h1>
+    <Form
+        v-bind="SecurityController.update.form()"
+        :options="{
+            preserveScroll: true,
+        }"
+        reset-on-success
+        :reset-on-error="[
+            'password',
+            'password_confirmation',
+            'current_password',
+        ]"
+        v-slot="{ processing, errors }"
+    >
+        <Fieldset
+            class="w-xs rounded-box border border-base-300 bg-base-200 p-4"
+        >
+            <FieldsetLegend>Update password</FieldsetLegend>
+
+            <Label for="current_password">Current password</Label>
+            <Input
+                type="password"
+                name="current_password"
+                id="current_password"
+                placeholder="Current password"
+                :class="{ 'input-error': errors.current_password }"
+            />
+            <InputError :message="errors.current_password" />
+
+            <Label for="password">New password</Label>
+            <Input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="New password"
+                :class="{ 'input-error': errors.password }"
+            />
+            <InputError :message="errors.password" />
+
+            <Label for="password_confirmation">Confirm password</Label>
+            <Input
+                type="password"
+                name="password_confirmation"
+                id="password_confirmation"
+                placeholder="Confirm password"
+                :class="{ 'input-error': errors.password_confirmation }"
+            />
+            <InputError :message="errors.password_confirmation" />
+
+            <Button
+                type="submit"
+                color="neutral"
+                class="mt-4"
+                :disabled="processing"
+            >
+                <Loading v-if="processing" variant="bars" />
+                <span v-else>Change password</span>
+            </Button>
+        </Fieldset>
+    </Form>
 </template>
