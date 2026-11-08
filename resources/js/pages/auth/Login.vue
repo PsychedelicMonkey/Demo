@@ -8,6 +8,9 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Loading } from '@/components/ui/loading';
 import { store } from '@/routes/login';
+import { Alert } from '@/components/ui/alert';
+import { TextLink } from '@/components/ui/text-link';
+import { request } from '@/routes/password';
 
 defineProps<{
     canResetPassword: boolean;
@@ -27,6 +30,9 @@ defineProps<{
             class="w-xs rounded-box border border-base-300 bg-base-200 p-4"
         >
             <FieldsetLegend>Login</FieldsetLegend>
+
+            <Alert v-if="status" color="success">{{ status }}</Alert>
+
             <Label for="email">Email address</Label>
             <Input
                 type="email"
@@ -47,10 +53,16 @@ defineProps<{
             />
             <InputError :message="errors.password" />
 
-            <Label>
-                <Checkbox name="remember" id="remember" />
-                Remember me
-            </Label>
+            <div class="flex items-center justify-between">
+                <Label>
+                    <Checkbox name="remember" id="remember" />
+                    Remember me
+                </Label>
+
+                <TextLink :href="request()" color="info"
+                    >Forgot password?</TextLink
+                >
+            </div>
 
             <Button color="neutral" class="mt-4" :disabled="processing">
                 <Loading v-if="processing" variant="bars" />
