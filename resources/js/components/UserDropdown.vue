@@ -3,6 +3,7 @@ import type { User } from '@/types';
 import { logout } from '@/routes';
 import { Badge } from '@/components/ui/badge';
 import { Link, router } from '@inertiajs/vue3';
+import { useInitials } from '@/composables/useInitials';
 
 defineProps<{
     user: User;
@@ -11,16 +12,19 @@ defineProps<{
 const handleLogout = () => {
     router.flushAll();
 };
+
+const { getInitials } = useInitials();
 </script>
 
 <template>
     <div class="dropdown dropdown-end">
-        <div tabindex="0" role="button" class="btn avatar btn-circle btn-ghost">
-            <div class="w-10 rounded-full">
-                <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
+        <div
+            tabindex="0"
+            role="button"
+            class="btn avatar avatar-placeholder btn-circle btn-ghost"
+        >
+            <div class="w-10 rounded-full bg-neutral text-neutral-content">
+                <span>{{ getInitials(user.name) }}</span>
             </div>
         </div>
         <ul

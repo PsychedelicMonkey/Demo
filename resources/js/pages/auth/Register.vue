@@ -9,8 +9,8 @@ import { Loading } from '@/components/ui/loading';
 import { store } from '@/routes/register';
 
 defineProps<{
-    passwordRules: string
-}>()
+    passwordRules: string;
+}>();
 </script>
 
 <template>
