@@ -1,6 +1,7 @@
 import { createInertiaApp } from '@inertiajs/vue3';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
+import { initializeFlashToast } from '@/lib/flashToast';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -27,3 +28,6 @@ void createInertiaApp({
         color: '#4B5563',
     },
 });
+
+// This will listen for flash toast data from the server...
+initializeFlashToast();
