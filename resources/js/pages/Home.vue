@@ -6,6 +6,10 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Loading } from '@/components/ui/loading';
+import InputError from '@/components/InputError.vue';
+import { Alert } from '@/components/ui/alert';
+import { TextLink } from '@/components/ui/text-link';
+import { home } from '@/routes';
 </script>
 
 <template>
@@ -15,8 +19,11 @@ import { Loading } from '@/components/ui/loading';
 
     <Fieldset class="w-xs rounded-box border border-base-300 bg-base-200 p-4">
         <FieldsetLegend>Login</FieldsetLegend>
+        <Alert color="info">FYI</Alert>
+
         <Label for="email">Email</Label>
         <Input type="email" name="email" id="email" placeholder="Email" />
+        <InputError message="Email already taken" />
         <Label for="password">Password</Label>
         <Input
             type="password"
@@ -24,6 +31,7 @@ import { Loading } from '@/components/ui/loading';
             id="password"
             placeholder="Password"
         />
+        <TextLink :href="home()" color="info">Forgot your password?</TextLink>
         <Label>
             <Checkbox name="remember" id="remember" />
             Remember me
