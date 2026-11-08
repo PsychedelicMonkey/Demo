@@ -1,7 +1,7 @@
-import type {VariantProps} from "class-variance-authority";
-import {cva} from "class-variance-authority";
+import type { VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 
-export {default as Loading} from './Loading.vue'
+export { default as Loading } from './Loading.vue';
 
 export const loadingVariants = cva('loading', {
     variants: {
@@ -19,8 +19,8 @@ export const loadingVariants = cva('loading', {
             md: 'loading-md',
             lg: 'loading-lg',
             xl: 'loading-xl',
-        }
-    }
-})
+        },
+    },
+});
 
-export type LoadingVariants = VariantProps<typeof loadingVariants>
+export type LoadingVariants = VariantProps<typeof loadingVariants>;

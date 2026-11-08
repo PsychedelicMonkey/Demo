@@ -2,8 +2,9 @@ import { defineConfig, lazyPlugins } from 'vite-plus';
 import laravel from 'laravel-vite-plugin';
 import { bunny } from 'laravel-vite-plugin/fonts';
 import tailwindcss from '@tailwindcss/vite';
-import inertia from '@inertiajs/vite'
-import vue from '@vitejs/plugin-vue'
+import inertia from '@inertiajs/vite';
+import vue from '@vitejs/plugin-vue';
+import { wayfinder } from '@laravel/vite-plugin-wayfinder';
 
 export default defineConfig({
     plugins: lazyPlugins(() => [
@@ -23,13 +24,55 @@ export default defineConfig({
                 transformAssetUrls: {
                     base: null,
                     includeAbsolute: false,
-                }
-            }
-        })
+                },
+            },
+        }),
+        wayfinder({
+            formVariants: true,
+        }),
     ]),
     server: {
         watch: {
-            ignored: ['**/storage/framework/views/**'],
+            ignored: [
+                '**/.agents/**',
+                '**/.claude/**',
+                '**/.cursor/**',
+                '**/.junie/**',
+                '**/vendor/**',
+            ],
+        },
+    },
+    lint: {
+        ignorePatterns: [
+            'vendor/**',
+            'node_modules/**',
+            'public/**',
+            'bootstrap/ssr/**',
+            'tailwind.config.js',
+            'resources/js/actions/**',
+            'resources/js/routes/**',
+            'resources/js/wayfinder/**',
+        ],
+        options: {
+            denyWarnings: true,
+            typeAware: true,
+        },
+    },
+    fmt: {
+        printWidth: 80,
+        tabWidth: 4,
+        singleQuote: true,
+        semi: true,
+        singleAttributePerLine: false,
+        htmlWhitespaceSensitivity: 'css',
+        ignorePatterns: [
+            '.github/**',
+            'composer.json',
+            'resources/views/mail/*',
+        ],
+        sortTailwindcss: {
+            functions: ['clsx', 'cn', 'cva'],
+            stylesheet: 'resources/css/app.css',
         },
     },
 });

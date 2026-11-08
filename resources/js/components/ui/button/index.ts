@@ -1,7 +1,7 @@
-import type {VariantProps} from "class-variance-authority";
-import {cva} from "class-variance-authority";
+import type { VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 
-export {default as Button} from './Button.vue';
+export { default as Button } from './Button.vue';
 
 export const buttonVariants = cva('btn', {
     variants: {
@@ -34,8 +34,8 @@ export const buttonVariants = cva('btn', {
             block: 'btn-block',
             square: 'btn-square',
             circle: 'btn-circle',
-        }
-    }
-})
+        },
+    },
+});
 
-export type ButtonVariants = VariantProps<typeof buttonVariants>
+export type ButtonVariants = VariantProps<typeof buttonVariants>;

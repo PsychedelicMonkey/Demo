@@ -1,7 +1,7 @@
-import type {VariantProps} from "class-variance-authority"
-import {cva} from "class-variance-authority";
+import type { VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 
-export {default as Checkbox} from './Checkbox.vue'
+export { default as Checkbox } from './Checkbox.vue';
 
 export const checkboxVariants = cva('checkbox', {
     variants: {
@@ -21,8 +21,8 @@ export const checkboxVariants = cva('checkbox', {
             md: 'checkbox-md',
             lg: 'checkbox-lg',
             xl: 'checkbox-xl',
-        }
-    }
-})
+        },
+    },
+});
 
-export type CheckboxVariants = VariantProps<typeof checkboxVariants>
+export type CheckboxVariants = VariantProps<typeof checkboxVariants>;
