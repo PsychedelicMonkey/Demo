@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Form, Head, usePage } from '@inertiajs/vue3';
+import { Form, Head, Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
 import { Label } from '@/components/ui/label';
@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Loading } from '@/components/ui/loading';
 import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
 import DeleteUser from '@/components/DeleteUser.vue';
+import { send } from '@/routes/verification';
 
 const page = usePage();
 const user = computed(() => page.props.auth.user);
@@ -47,6 +48,22 @@ const user = computed(() => page.props.auth.user);
                 :class="{ 'input-error': errors.email }"
             />
             <InputError :message="errors.email" />
+
+            <div v-if="page.props.mustVerifyEmail && !user.email_verified_at">
+                <p class="text-xs">
+                    Your email address is unverified.
+                    <Link :href="send()" as="button" class="link">
+                        Click here to re-send the verification email.
+                    </Link>
+                </p>
+
+                <div
+                    v-if="page.props.status === 'verification-link-sent'"
+                    class="mt-2 text-xs font-medium text-success"
+                >
+                    A new verification link has been sent to your email address.
+                </div>
+            </div>
 
             <Button
                 type="submit"
