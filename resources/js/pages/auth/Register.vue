@@ -7,6 +7,7 @@ import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Loading } from '@/components/ui/loading';
 import { store } from '@/routes/register';
+import PasswordInput from '@/components/PasswordInput.vue';
 
 defineProps<{
     passwordRules: string;
@@ -57,12 +58,13 @@ defineProps<{
             <InputError :message="errors.password" />
 
             <Label for="password_confirmation">Confirm password</Label>
-            <Input
+            <PasswordInput
                 type="password"
                 name="password_confirmation"
                 id="password_confirmation"
                 placeholder="Confirm password"
                 :class="{ 'input-error': errors.password_confirmation }"
+                :passwordrules="passwordRules"
             />
             <InputError :message="errors.password_confirmation" />
 
@@ -72,7 +74,7 @@ defineProps<{
                 class="mt-4"
                 :disabled="processing"
             >
-                <Loading v-if="processing" />
+                <Loading v-if="processing" variant="bars" />
                 <span v-else>Register</span>
             </Button>
         </Fieldset>

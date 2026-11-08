@@ -53,7 +53,7 @@ defineProps<{
             </Label>
 
             <Button color="neutral" class="mt-4" :disabled="processing">
-                <Loading v-if="processing" />
+                <Loading v-if="processing" variant="bars" />
                 <span v-else>Login</span>
             </Button>
         </Fieldset>

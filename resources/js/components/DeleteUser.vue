@@ -3,11 +3,14 @@ import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
 import { Button } from '@/components/ui/button';
 import { Form } from '@inertiajs/vue3';
 import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import InputError from '@/components/InputError.vue';
 import { Loading } from '@/components/ui/loading';
 import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
 import { X } from '@lucide/vue';
+import PasswordInput from '@/components/PasswordInput.vue';
+import { useTemplateRef } from 'vue';
+
+const passwordInput = useTemplateRef('passwordInput');
 </script>
 
 <template>
@@ -30,17 +33,19 @@ import { X } from '@lucide/vue';
                 <Form
                     v-bind="ProfileController.destroy.form()"
                     reset-on-success
+                    @error="() => passwordInput?.focus()"
                     :options="{
                         preserveScroll: true,
                     }"
                     v-slot="{ errors, processing, reset, clearErrors }"
                 >
                     <Fieldset>
-                        <Label for="password">Password</Label>
-                        <Input
+                        <Label for="password" class="sr-only">Password</Label>
+                        <PasswordInput
                             type="password"
                             name="password"
                             id="password"
+                            ref="passwordInput"
                             placeholder="Password"
                             :class="[
                                 'w-full',
