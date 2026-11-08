@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
+import { edit as editAppearance } from '@/routes/appearance';
 import { edit as editProfile } from '@/routes/profile';
 import { edit as editSecurity } from '@/routes/security';
 import { useCurrentUrl } from '@/composables/useCurrentUrl';
@@ -23,6 +24,16 @@ const { isCurrentOrParentUrl } = useCurrentUrl();
                 :class="{ 'menu-active': isCurrentOrParentUrl(editSecurity()) }"
             >
                 Security settings
+            </Link>
+        </li>
+        <li>
+            <Link
+                :href="editAppearance()"
+                :class="{
+                    'menu-active': isCurrentOrParentUrl(editAppearance()),
+                }"
+            >
+                Appearance settings
             </Link>
         </li>
     </ul>
