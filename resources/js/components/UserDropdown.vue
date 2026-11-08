@@ -4,6 +4,7 @@ import { logout } from '@/routes';
 import { Badge } from '@/components/ui/badge';
 import { Link, router } from '@inertiajs/vue3';
 import { useInitials } from '@/composables/useInitials';
+import { edit } from '@/routes/profile';
 
 defineProps<{
     user: User;
@@ -37,7 +38,9 @@ const { getInitials } = useInitials();
                     <Badge>New</Badge>
                 </a>
             </li>
-            <li><a>Settings</a></li>
+            <li>
+                <Link :href="edit()">Settings</Link>
+            </li>
             <li>
                 <Link :href="logout()" @click="handleLogout" as="button">
                     Logout

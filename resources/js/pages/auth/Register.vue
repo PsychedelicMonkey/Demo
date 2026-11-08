@@ -27,7 +27,13 @@ defineProps<{
             <FieldsetLegend>Register</FieldsetLegend>
 
             <Label for="name">Name</Label>
-            <Input type="text" name="name" id="name" placeholder="Name" />
+            <Input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Name"
+                :class="{ 'input-error': errors.name }"
+            />
             <InputError :message="errors.name" />
 
             <Label for="email">Email address</Label>
@@ -36,6 +42,7 @@ defineProps<{
                 name="email"
                 id="email"
                 placeholder="Email address"
+                :class="{ 'input-error': errors.email }"
             />
             <InputError :message="errors.email" />
 
@@ -45,6 +52,7 @@ defineProps<{
                 name="password"
                 id="password"
                 placeholder="Password"
+                :class="{ 'input-error': errors.password }"
             />
             <InputError :message="errors.password" />
 
@@ -54,6 +62,7 @@ defineProps<{
                 name="password_confirmation"
                 id="password_confirmation"
                 placeholder="Confirm password"
+                :class="{ 'input-error': errors.password_confirmation }"
             />
             <InputError :message="errors.password_confirmation" />
 
