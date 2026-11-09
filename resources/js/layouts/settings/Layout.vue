@@ -4,36 +4,25 @@ import { edit as editAppearance } from '@/routes/appearance';
 import { edit as editProfile } from '@/routes/profile';
 import { edit as editSecurity } from '@/routes/security';
 import { useCurrentUrl } from '@/composables/useCurrentUrl';
+import type { NavItem } from '@/types';
+
+const navItems: NavItem[] = [
+    { title: 'Profile', href: editProfile() },
+    { title: 'Security', href: editSecurity() },
+    { title: 'Appearance', href: editAppearance() },
+];
 
 const { isCurrentOrParentUrl } = useCurrentUrl();
 </script>
 
 <template>
     <ul class="menu menu-horizontal">
-        <li>
+        <li v-for="{ title, href } in navItems" :key="title">
             <Link
-                :href="editProfile()"
-                :class="{ 'menu-active': isCurrentOrParentUrl(editProfile()) }"
+                :href="href"
+                :class="{ 'menu-active': isCurrentOrParentUrl(href) }"
             >
-                Profile settings
-            </Link>
-        </li>
-        <li>
-            <Link
-                :href="editSecurity()"
-                :class="{ 'menu-active': isCurrentOrParentUrl(editSecurity()) }"
-            >
-                Security settings
-            </Link>
-        </li>
-        <li>
-            <Link
-                :href="editAppearance()"
-                :class="{
-                    'menu-active': isCurrentOrParentUrl(editAppearance()),
-                }"
-            >
-                Appearance settings
+                {{ title }}
             </Link>
         </li>
     </ul>
