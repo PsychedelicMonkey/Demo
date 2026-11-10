@@ -7,6 +7,11 @@ import InputError from '@/components/InputError.vue';
 import { store } from '@/routes/password/confirm';
 import { Button } from '@/components/ui/button';
 import { Loading } from '@/components/ui/loading';
+import {
+    index as confirmOptions,
+    store as confirmStore,
+} from '@/actions/Laravel/Passkeys/Http/Controllers/PasskeyConfirmationController';
+import PasskeyVerify from '@/components/PasskeyVerify.vue';
 </script>
 
 <template>
@@ -21,6 +26,16 @@ import { Loading } from '@/components/ui/loading';
             class="w-xs rounded-box border border-base-300 bg-base-200 p-4"
         >
             <FieldsetLegend>Confirm password</FieldsetLegend>
+
+            <PasskeyVerify
+                :routes="{
+                    options: confirmOptions(),
+                    submit: confirmStore(),
+                }"
+                label="Confirm with passkey"
+                loading-label="Confirming..."
+                separator="Or confirm with password"
+            />
 
             <Label for="password">Password</Label>
             <PasswordInput

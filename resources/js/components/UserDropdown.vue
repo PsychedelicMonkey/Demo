@@ -73,7 +73,10 @@ const { getInitials } = useInitials();
                     <details>
                         <summary>Settings</summary>
                         <ul>
-                            <li v-for="{ title, href } in navItems" :key="title">
+                            <li
+                                v-for="{ title, href } in navItems"
+                                :key="title"
+                            >
                                 <Link
                                     :href="href"
                                     :class="{

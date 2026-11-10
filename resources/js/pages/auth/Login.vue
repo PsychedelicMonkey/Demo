@@ -11,6 +11,7 @@ import { store } from '@/routes/login';
 import { Alert } from '@/components/ui/alert';
 import { TextLink } from '@/components/ui/text-link';
 import { request } from '@/routes/password';
+import PasskeyVerify from '@/components/PasskeyVerify.vue';
 
 defineProps<{
     canResetPassword: boolean;
@@ -31,7 +32,11 @@ defineProps<{
         >
             <FieldsetLegend>Login</FieldsetLegend>
 
-            <Alert v-if="status" color="success">{{ status }}</Alert>
+            <Alert v-if="status" color="success" class="mb-4">{{
+                status
+            }}</Alert>
+
+            <PasskeyVerify />
 
             <Label for="email">Email address</Label>
             <Input

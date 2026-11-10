@@ -7,10 +7,12 @@ import { Button } from '@/components/ui/button';
 import { Loading } from '@/components/ui/loading';
 import SecurityController from '@/actions/App/Http/Controllers/Settings/SecurityController';
 import PasswordInput from '@/components/PasswordInput.vue';
+import ManagePasskeys from '@/components/ManagePasskeys.vue';
+import type { Props as ManagePasskeysProps } from '@/components/ManagePasskeys.vue';
 
 type Props = {
     passwordRules: string;
-};
+} & ManagePasskeysProps;
 
 const props = defineProps<Props>();
 </script>
@@ -82,4 +84,9 @@ const props = defineProps<Props>();
             </Button>
         </Fieldset>
     </Form>
+
+    <ManagePasskeys
+        :canManagePasskeys="canManagePasskeys"
+        :passkeys="passkeys"
+    />
 </template>
