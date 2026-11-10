@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Form, Head } from '@inertiajs/vue3';
-import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
+import { Fieldset } from '@/components/ui/fieldset';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/InputError.vue';
@@ -12,6 +12,14 @@ import { Alert } from '@/components/ui/alert';
 import { TextLink } from '@/components/ui/text-link';
 import { request } from '@/routes/password';
 import PasskeyVerify from '@/components/PasskeyVerify.vue';
+import { register } from '@/routes';
+
+defineOptions({
+    layout: {
+        title: 'Login',
+        description: 'Enter your email and password to log in',
+    },
+});
 
 defineProps<{
     canResetPassword: boolean;
@@ -27,14 +35,10 @@ defineProps<{
         :reset-on-success="['password']"
         v-slot="{ processing, errors }"
     >
-        <Fieldset
-            class="w-xs rounded-box border border-base-300 bg-base-200 p-4"
-        >
-            <FieldsetLegend>Login</FieldsetLegend>
-
-            <Alert v-if="status" color="success" class="mb-4">{{
-                status
-            }}</Alert>
+        <Fieldset>
+            <Alert v-if="status" color="success" class="my-4">
+                {{ status }}
+            </Alert>
 
             <PasskeyVerify />
 
@@ -44,7 +48,7 @@ defineProps<{
                 name="email"
                 id="email"
                 placeholder="Email address"
-                :class="{ 'input-error': errors.email }"
+                :class="['w-full', { 'input-error': errors.email }]"
             />
             <InputError :message="errors.email" />
 
@@ -54,7 +58,7 @@ defineProps<{
                 name="password"
                 id="password"
                 placeholder="Password"
-                :class="{ 'input-error': errors.password }"
+                :class="['w-full', { 'input-error': errors.password }]"
             />
             <InputError :message="errors.password" />
 
@@ -75,4 +79,9 @@ defineProps<{
             </Button>
         </Fieldset>
     </Form>
+
+    <p class="text-center">
+        Don't have an account?
+        <TextLink :href="register()">Register</TextLink>
+    </p>
 </template>

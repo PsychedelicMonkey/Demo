@@ -7,6 +7,14 @@ import { TextLink } from '@/components/ui/text-link';
 import { logout } from '@/routes';
 import { Alert } from '@/components/ui/alert';
 
+defineOptions({
+    layout: {
+        title: 'Email verification',
+        description:
+            'Please verify your email address by clicking on the link we just emailed to you',
+    },
+});
+
 defineProps<{
     status?: string;
 }>();
@@ -15,7 +23,7 @@ defineProps<{
 <template>
     <Head title="Verify email" />
 
-    <Alert v-if="status === 'verification-link-sent'" color="info" class="mb-4">
+    <Alert v-if="status === 'verification-link-sent'" color="info" class="my-4">
         A new verification link has been sent to the email address you provided
         during registration
     </Alert>
@@ -25,7 +33,7 @@ defineProps<{
         class="space-y-6 text-center"
         v-slot="{ processing }"
     >
-        <Button modifier="block" :disabled="processing">
+        <Button color="neutral" modifier="block" :disabled="processing">
             <Loading v-if="processing" variant="bars" />
             <span v-else>Send verification email</span>
         </Button>

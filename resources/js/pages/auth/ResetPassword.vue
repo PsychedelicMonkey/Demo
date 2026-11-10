@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Form, Head } from '@inertiajs/vue3';
-import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
+import { Fieldset } from '@/components/ui/fieldset';
 import { Label } from '@/components/ui/label';
 import { ref } from 'vue';
 import { update } from '@/routes/password';
@@ -9,6 +9,13 @@ import InputError from '@/components/InputError.vue';
 import PasswordInput from '@/components/PasswordInput.vue';
 import { Button } from '@/components/ui/button';
 import { Loading } from '@/components/ui/loading';
+
+defineOptions({
+    layout: {
+        title: 'Reset password',
+        description: 'Please enter your new password',
+    },
+});
 
 const props = defineProps<{
     token: string;
@@ -28,11 +35,7 @@ const inputEmail = ref(props.email);
         :reset-on-success="['password', 'password_confirmation']"
         v-slot="{ processing, errors }"
     >
-        <Fieldset
-            class="w-xs rounded-box border border-base-300 bg-base-200 p-4"
-        >
-            <FieldsetLegend>Reset password</FieldsetLegend>
-
+        <Fieldset>
             <Label for="email">Email address</Label>
             <Input
                 type="email"
@@ -40,7 +43,7 @@ const inputEmail = ref(props.email);
                 id="email"
                 placeholder="Email address"
                 v-model="inputEmail"
-                :class="{ 'input-error': errors.email }"
+                :class="['w-full', { 'input-error': errors.email }]"
                 readonly
             />
             <InputError :message="errors.email" />
@@ -51,7 +54,7 @@ const inputEmail = ref(props.email);
                 name="password"
                 id="password"
                 placeholder="Password"
-                :class="{ 'input-error': errors.password }"
+                :class="['w-full', { 'input-error': errors.password }]"
                 :passwordrules="passwordRules"
             />
             <InputError :message="errors.password" />
@@ -62,7 +65,10 @@ const inputEmail = ref(props.email);
                 name="password_confirmation"
                 id="password_confirmation"
                 placeholder="Confirm password"
-                :class="{ 'input-error': errors.password_confirmation }"
+                :class="[
+                    'w-full',
+                    { 'input-error': errors.password_confirmation },
+                ]"
                 :passwordrules="passwordRules"
             />
             <InputError :message="errors.password_confirmation" />

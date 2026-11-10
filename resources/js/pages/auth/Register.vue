@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Form, Head } from '@inertiajs/vue3';
-import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
+import { Fieldset } from '@/components/ui/fieldset';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/InputError.vue';
@@ -8,6 +8,13 @@ import { Button } from '@/components/ui/button';
 import { Loading } from '@/components/ui/loading';
 import { store } from '@/routes/register';
 import PasswordInput from '@/components/PasswordInput.vue';
+
+defineOptions({
+    layout: {
+        title: 'Create an account',
+        description: 'Enter your details to create your account',
+    },
+});
 
 defineProps<{
     passwordRules: string;
@@ -22,18 +29,14 @@ defineProps<{
         :reset-on-success="['password', 'password_confirmation']"
         v-slot="{ processing, errors }"
     >
-        <Fieldset
-            class="w-xs rounded-box border border-base-300 bg-base-200 p-4"
-        >
-            <FieldsetLegend>Register</FieldsetLegend>
-
+        <Fieldset>
             <Label for="name">Name</Label>
             <Input
                 type="text"
                 name="name"
                 id="name"
                 placeholder="Name"
-                :class="{ 'input-error': errors.name }"
+                :class="['w-full', { 'input-error': errors.name }]"
             />
             <InputError :message="errors.name" />
 
@@ -43,7 +46,7 @@ defineProps<{
                 name="email"
                 id="email"
                 placeholder="Email address"
-                :class="{ 'input-error': errors.email }"
+                :class="['w-full', { 'input-error': errors.email }]"
             />
             <InputError :message="errors.email" />
 
@@ -53,7 +56,7 @@ defineProps<{
                 name="password"
                 id="password"
                 placeholder="Password"
-                :class="{ 'input-error': errors.password }"
+                :class="['w-full', { 'input-error': errors.password }]"
             />
             <InputError :message="errors.password" />
 
@@ -63,7 +66,10 @@ defineProps<{
                 name="password_confirmation"
                 id="password_confirmation"
                 placeholder="Confirm password"
-                :class="{ 'input-error': errors.password_confirmation }"
+                :class="[
+                    'w-full',
+                    { 'input-error': errors.password_confirmation },
+                ]"
                 :passwordrules="passwordRules"
             />
             <InputError :message="errors.password_confirmation" />

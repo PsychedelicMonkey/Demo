@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Form, Head } from '@inertiajs/vue3';
-import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
+import { Fieldset } from '@/components/ui/fieldset';
 import { Label } from '@/components/ui/label';
 import PasswordInput from '@/components/PasswordInput.vue';
 import InputError from '@/components/InputError.vue';
@@ -12,6 +12,14 @@ import {
     store as confirmStore,
 } from '@/actions/Laravel/Passkeys/Http/Controllers/PasskeyConfirmationController';
 import PasskeyVerify from '@/components/PasskeyVerify.vue';
+
+defineOptions({
+    layout: {
+        title: 'Confirm password',
+        description:
+            'This is a secure area of the application. Please confirm your password before continuing.',
+    },
+});
 </script>
 
 <template>
@@ -22,11 +30,7 @@ import PasskeyVerify from '@/components/PasskeyVerify.vue';
         reset-on-success
         v-slot="{ processing, errors }"
     >
-        <Fieldset
-            class="w-xs rounded-box border border-base-300 bg-base-200 p-4"
-        >
-            <FieldsetLegend>Confirm password</FieldsetLegend>
-
+        <Fieldset>
             <PasskeyVerify
                 :routes="{
                     options: confirmOptions(),
@@ -46,7 +50,7 @@ import PasskeyVerify from '@/components/PasskeyVerify.vue';
                 required
                 autocomplete="current-password"
                 autofocus
-                :class="{ 'input-error': errors.password }"
+                :class="['w-full', { 'input-error': errors.password }]"
             />
             <InputError :message="errors.password" />
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Form, Head } from '@inertiajs/vue3';
-import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
+import { Fieldset } from '@/components/ui/fieldset';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/InputError.vue';
@@ -8,6 +8,13 @@ import { Button } from '@/components/ui/button';
 import { Loading } from '@/components/ui/loading';
 import { Alert } from '@/components/ui/alert';
 import { email } from '@/routes/password';
+
+defineOptions({
+    layout: {
+        title: 'Forgot password',
+        description: 'Enter your email to receive a password reset link',
+    },
+});
 
 defineProps<{
     status?: string;
@@ -18,12 +25,8 @@ defineProps<{
     <Head title="Forgot password" />
 
     <Form v-bind="email.form()" v-slot="{ processing, errors }">
-        <Fieldset
-            class="w-xs rounded-box border border-base-300 bg-base-200 p-4"
-        >
-            <FieldsetLegend>Forgot password</FieldsetLegend>
-
-            <Alert v-if="status" color="info">{{ status }}</Alert>
+        <Fieldset>
+            <Alert v-if="status" color="info" class="my-4">{{ status }}</Alert>
 
             <Label for="email">Email address</Label>
             <Input
@@ -31,7 +34,7 @@ defineProps<{
                 name="email"
                 id="email"
                 placeholder="Email address"
-                :class="{ 'input-error': errors.email }"
+                :class="['w-full', { 'input-error': errors.email }]"
                 v-focus
             />
             <InputError :message="errors.email" />
