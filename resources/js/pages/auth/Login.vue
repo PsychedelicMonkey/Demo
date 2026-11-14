@@ -13,6 +13,7 @@ import { TextLink } from '@/components/ui/text-link';
 import { request } from '@/routes/password';
 import PasskeyVerify from '@/components/PasskeyVerify.vue';
 import { register } from '@/routes';
+import PasswordInput from '@/components/PasswordInput.vue';
 
 defineOptions({
     layout: {
@@ -53,8 +54,7 @@ defineProps<{
             <InputError :message="errors.email" />
 
             <Label for="password">Password</Label>
-            <Input
-                type="password"
+            <PasswordInput
                 name="password"
                 id="password"
                 placeholder="Password"

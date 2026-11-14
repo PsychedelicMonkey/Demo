@@ -43,7 +43,6 @@ defineOptions({
 
             <Label for="password">Password</Label>
             <PasswordInput
-                type="password"
                 name="password"
                 id="password"
                 placeholder="Password"

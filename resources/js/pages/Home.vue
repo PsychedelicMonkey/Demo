@@ -10,10 +10,14 @@ import InputError from '@/components/InputError.vue';
 import { Alert } from '@/components/ui/alert';
 import { TextLink } from '@/components/ui/text-link';
 import { home } from '@/routes';
+import PasswordInput from '@/components/PasswordInput.vue';
+import { Kbd } from '@/components/ui/kbd';
 </script>
 
 <template>
     <Head title="Home Page" />
+
+    <Kbd>ESC</Kbd>
 
     <h1 class="text-3xl font-semibold">Home Page</h1>
 
@@ -25,12 +29,7 @@ import { home } from '@/routes';
         <Input type="email" name="email" id="email" placeholder="Email" />
         <InputError message="Email already taken" />
         <Label for="password">Password</Label>
-        <Input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Password"
-        />
+        <PasswordInput name="password" id="password" placeholder="Password" />
         <TextLink :href="home()" color="info">Forgot your password?</TextLink>
         <Label>
             <Checkbox name="remember" id="remember" />

@@ -40,7 +40,6 @@ const props = defineProps<Props>();
 
             <Label for="current_password">Current password</Label>
             <PasswordInput
-                type="password"
                 name="current_password"
                 id="current_password"
                 placeholder="Current password"
@@ -51,7 +50,6 @@ const props = defineProps<Props>();
 
             <Label for="password">New password</Label>
             <PasswordInput
-                type="password"
                 name="password"
                 id="password"
                 autocomplete="new-password"
@@ -63,7 +61,6 @@ const props = defineProps<Props>();
 
             <Label for="password_confirmation">Confirm password</Label>
             <PasswordInput
-                type="password"
                 name="password_confirmation"
                 id="password_confirmation"
                 placeholder="Confirm password"

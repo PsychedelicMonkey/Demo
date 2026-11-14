@@ -50,7 +50,6 @@ const inputEmail = ref(props.email);
 
             <Label for="password">Password</Label>
             <PasswordInput
-                type="password"
                 name="password"
                 id="password"
                 placeholder="Password"
@@ -61,7 +60,6 @@ const inputEmail = ref(props.email);
 
             <Label for="password_confirmation">Confirm password</Label>
             <PasswordInput
-                type="password"
                 name="password_confirmation"
                 id="password_confirmation"
                 placeholder="Confirm password"

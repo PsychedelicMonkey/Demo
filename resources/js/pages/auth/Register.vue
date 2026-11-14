@@ -51,8 +51,7 @@ defineProps<{
             <InputError :message="errors.email" />
 
             <Label for="password">Password</Label>
-            <Input
-                type="password"
+            <PasswordInput
                 name="password"
                 id="password"
                 placeholder="Password"
@@ -62,7 +61,6 @@ defineProps<{
 
             <Label for="password_confirmation">Confirm password</Label>
             <PasswordInput
-                type="password"
                 name="password_confirmation"
                 id="password_confirmation"
                 placeholder="Confirm password"

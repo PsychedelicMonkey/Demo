@@ -2,7 +2,7 @@
 import { Link } from '@inertiajs/vue3';
 import { home } from '@/routes';
 import { Card, CardBody, CardTitle } from '@/components/ui/card';
-import AppLogoIcon from "@/components/AppLogoIcon.vue";
+import AppLogoIcon from '@/components/AppLogoIcon.vue';
 
 defineProps<{
     title?: string;
