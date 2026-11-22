@@ -1,43 +1,77 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
-import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Head, Link } from '@inertiajs/vue3';
+import type { SimplePagination, User } from '@/types';
 import { Button } from '@/components/ui/button';
-import { Loading } from '@/components/ui/loading';
-import InputError from '@/components/InputError.vue';
-import { Alert } from '@/components/ui/alert';
-import { TextLink } from '@/components/ui/text-link';
-import { home } from '@/routes';
-import PasswordInput from '@/components/PasswordInput.vue';
-import { Kbd } from '@/components/ui/kbd';
+import { useInitials } from '@/composables/useInitials';
+
+const { getInitials } = useInitials();
+
+defineProps<{
+    users?: SimplePagination<User>;
+}>();
 </script>
 
 <template>
     <Head title="Home Page" />
 
-    <Kbd>ESC</Kbd>
+    <template v-if="users">
+        <div class="overflow-x-auto">
+            <table class="table table-zebra">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Date joined</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="user in users.data" :key="user.id">
+                        <td>
+                            <div class="avatar avatar-placeholder">
+                                <div
+                                    class="w-10 rounded-full bg-neutral text-neutral-content"
+                                >
+                                    <span>{{ getInitials(user.name) }}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.created_at }}</td>
+                        <td>
+                            <Button>View Profile</Button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-    <h1 class="text-3xl font-semibold">Home Page</h1>
+            <div class="join grid grid-cols-2">
+                <Link
+                    v-if="users.prev_page_url"
+                    :href="users.prev_page_url"
+                    preserveScroll
+                    class="btn join-item btn-outline"
+                >
+                    Previous
+                </Link>
+                <Button v-else variant="outline" class="join-item" disabled>
+                    Previous
+                </Button>
 
-    <Fieldset class="w-xs rounded-box border border-base-300 bg-base-200 p-4">
-        <FieldsetLegend>Login</FieldsetLegend>
-        <Alert color="info">FYI</Alert>
-
-        <Label for="email">Email</Label>
-        <Input type="email" name="email" id="email" placeholder="Email" />
-        <InputError message="Email already taken" />
-        <Label for="password">Password</Label>
-        <PasswordInput name="password" id="password" placeholder="Password" />
-        <TextLink :href="home()" color="info">Forgot your password?</TextLink>
-        <Label>
-            <Checkbox name="remember" id="remember" />
-            Remember me
-        </Label>
-        <Button type="submit" color="neutral" class="mt-4">
-            <Loading variant="bars" />
-            <span>Login</span>
-        </Button>
-    </Fieldset>
+                <Link
+                    v-if="users.next_page_url"
+                    :href="users.next_page_url"
+                    preserveScroll
+                    class="btn join-item btn-outline"
+                >
+                    Next
+                </Link>
+                <Button v-else variant="outline" class="join-item" disabled>
+                    Next
+                </Button>
+            </div>
+        </div>
+    </template>
 </template>
